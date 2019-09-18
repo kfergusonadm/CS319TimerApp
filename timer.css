@@ -1,0 +1,10 @@
+.material-icons.big-padded {
+    font-size: 48px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.no-margin {
+    margin: 0px;
+}

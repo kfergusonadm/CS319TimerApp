@@ -1,0 +1,106 @@
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- AngularJS Material Design CSS -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+
+    <!-- Our custom CSS -->
+    <link rel="stylesheet" href="timer.css">
+
+    <!-- AngularJS Fonts -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body ng-app="TimerApp" ng-cloak>
+
+    <div ng-controller="TimerCtrl" layout="column">
+
+        <md-toolbar layout="row" class="md-hue-3">
+            <div class="md-toolbar-tools">
+                <span class="md-headline">Timer App</span>
+            </div>
+        </md-toolbar>
+
+        <md-content>
+
+            <md-card>
+
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-title">Create a new Timer</span>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-actions layout="row" layout-align="start center">
+                    <form ng-submit="addTimer()" style="padding-left: 10px;">
+                        <md-input-container flex class="no-margin">
+                            <label>Title</label>
+                            <input ng-model="addTimerForm.title" type="text" required/>
+                            <div ng-messages="colorForm.favoriteColor.$error">
+                                <div ng-message="required">This is required!</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex class="no-margin">
+                            <label>Length (in seconds)</label>
+                            <input ng-model="addTimerForm.length" type="number" required/>
+                            <div ng-messages="colorForm.favoriteColor.$error">
+                                <div ng-message="required">This is required!</div>
+                            </div>
+                        </md-input-container>
+                        <md-switch ng-model="addTimerForm.startOnAdd" aria-label="Start Immediatly" class="no-margin">
+                            Start Immediately
+                        </md-switch>
+                        <div style="margin-top: 5px;">
+                            <md-button type="submit">Add Timer</md-button>
+                        </div>
+                    </form>
+                </md-card-actions>
+
+            </md-card>
+
+            <md-card>
+
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-title">Your Timers</span>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-list flex>
+
+                    <md-list-item ng-repeat="(key,val) in timers">
+                        <i class="material-icons big-padded">alarm</i>
+                        <span>
+                            <span class="md-subheading-2">{{ val.timeLeftFormatted }}</span>
+                        <span class="md-subheading-1">{{ key }}</span>
+                        </span>
+
+                        <md-button class="md-secondary" ng-show="val.started == false" ng-click="startTimer(key)">Start</md-button>
+                        <md-button class="md-secondary" ng-click="removeTimer(key)">Remove</md-button>
+                        <md-button class="md-secondary" ng-show="val.paused == false" ng-click="pauseTimer(key)">Pause</md-button>
+                        <md-button class="md-secondary" ng-show="val.paused == true" ng-click="resumeTimer(key)">Resume</md-button>
+                    </md-list-item>
+
+                </md-list>
+
+            </md-card>
+
+        </md-content>
+
+    </div>
+
+    <!-- Angular Material Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+    <!-- Our app's JS -->
+    <script src="timer.js"></script>
+
+</body>
+</html>
